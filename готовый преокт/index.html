@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProStroy - Главная</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Hero секция с изображением и встроенной шапкой -->
+        <div class="hero-section">
+            <header class="hero-header">
+                <img class="logo" src="img/logo.png" alt="ProStroy">
+                <nav>
+                    <ul>
+                        <li class="active"><a href="index.html">главная</a></li>
+                        <li class="btn"><a href="#" id="auth-link">войти</a></li>
+                        <li class="btn"><a href="materials.html" id="materials-link">материалы</a></li>
+                        <li class="btn"><a href="visualizer.html">визуализатор</a></li>
+                        <li class="btn"><button id="themeToggle" class="theme-toggle">🌓</button></li>
+                    </ul>
+                </nav>
+            </header>
+            
+            <!-- Контент поверх изображения -->
+            
+            
+            <!-- Fallback фон на случай проблем с изображениями -->
+            <div class="hero-fallback-bg"></div>
+        </div>
+
+        <!-- Слайдшоу для всех пользователей -->
+        <div class="material">
+            <p>Наши проекты</p>
+        </div>
+
+        <div class="slideshow-container">
+            <div class="slideshow">
+                <div class="slideshow-item">
+                    <img src="img/дом1321.jpg" alt="Проект 1">
+                    <div class="slideshow-item-text">
+                        <h3>КИБИДКА СТТУДЕНТА</h3>
+                        <p>Дешевая, быстро строится не требует высоких затрат на поддержания</p>
+                    </div>
+                </div>
+                <div class="slideshow-item">
+                    <img src="img/дом4.jpg" alt="Проект 2">
+                    <div class="slideshow-item-text">
+                        <h3>БУДКА МОДУЛЬНАЯ</h3>
+                        <p>Компактное решение для временного проживания</p>
+                    </div>
+                </div>
+                <div class="slideshow-item">
+                    <img src="img/дом2.jpg" alt="Проект 3">
+                    <div class="slideshow-item-text">
+                        <h3>УВАЖАЕМАЯ БУДКА</h3>
+                        <p>Комфортное жилье для постоянного проживания</p>
+                    </div>
+                </div>
+                <div class="slideshow-item">
+                    <img src="img/дом3.jpg" alt="Проект 4">
+                    <div class="slideshow-item-text">
+                        <h3>ХАРОМЫ</h3>
+                        <p>Просторное модульное здание премиум-класса</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Контент для неавторизованных пользователей -->
+        <div id="public-content">
+            <div class="features-section container">
+                <div class="feature-card">
+                    <div class="feature-icon">🏠</div>
+                    <h3>Модульные дома</h3>
+                    <p>Быстрое строительство качественных модульных домов любой сложности</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Скорость</h3>
+                    <p>Строительство в 3 раза быстрее традиционных методов</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Экономия</h3>
+                    <p>Доступные цены без потери качества материалов</p>
+                </div>
+            </div>
+
+            <div class="login-prompt container" id="materials-prompt">
+                <h3>Для доступа к материалам и оформления заказа требуется авторизация</h3>
+                <p>Зарегистрируйтесь, чтобы получить полный доступ к каталогу и визуализатору</p>
+                <button class="btn" onclick="auth.showAuth()" style="margin-top: 20px;">
+                    <a style="text-decoration: none; color: #228a8a;">Войти в систему</a>
+                </button>
+            </div>
+        </div>
+
+        <!-- Контент для авторизованных пользователей -->
+        <div id="protected-content" class="protected-content">
+            <div class="material">
+                <p>Стройматериалы</p>
+            </div>
+
+            <div class="cards container">
+                <div class="card">
+                    <div class="card__top">
+                        <a href="#" class="card__image">
+                            <img src="img/доски.jpg" alt="доски"/>
+                        </a>
+                    </div>
+                    <div class="card__bottom">
+                        <div class="card__prices">
+                            <div class="cardprice cardprice--discount">135 000</div>
+                        </div>
+                        <a href="#" class="card__title">
+                            Доски обычные 1м
+                        </a>
+                        <button class="card__add" onclick="cart.addToCart('Доски обычные', 135000)">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card__top">
+                        <a href="#" class="card__image">
+                            <img src="img/стенка.jpg" alt="стенка"/>
+                        </a>
+                    </div>
+                    <div class="card__bottom">
+                        <div class="card__prices">
+                            <div class="cardprice cardprice--discount">135 000</div>
+                        </div>
+                        <a href="#" class="card__title">
+                            Стеновые панели
+                        </a>
+                        <button class="card__add" onclick="cart.addToCart('Стеновые панели', 135000)">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card__top">
+                        <a href="#" class="card__image">
+                            <img src="img/камень.jpg" alt="камень"/>
+                        </a>
+                    </div>
+                    <div class="card__bottom">
+                        <div class="card__prices">
+                            <div class="cardprice cardprice--discount">135 000</div>
+                        </div>
+                        <a href="#" class="card__title">
+                            Декоративный камень
+                        </a>
+                        <button class="card__add" onclick="cart.addToCart('Декоративный камень', 135000)">В корзину</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card__top">
+                        <a href="#" class="card__image">
+                            <img src="img/кирпичная.jpg" alt="кладка"/>
+                        </a>
+                    </div>
+                    <div class="card__bottom">
+                        <div class="card__prices">
+                            <div class="cardprice cardprice--discount">135 000</div>
+                        </div>
+                        <a href="#" class="card__title">
+                            Кирпичная кладка
+                        </a>
+                        <button class="card__add" onclick="cart.addToCart('Кирпичная кладка', 135000)">В корзину</button>
+                    </div>
+                </div>
+            </div>
+         
+            <div class="magazin">
+                <button class="card__add">
+                    <a href="materials.html" style="text-decoration: none; color: #70c05b;">Смотреть ещё</a>
+                </button>
+            </div>
+        </div>
+
+        <!-- Модальное окно авторизации -->
+        <div id="authModal" class="auth-modal">
+            <div class="auth-container">
+                <div id="login-form" class="auth-form">
+                    <h2>Вход</h2>
+                    <div class="form-group">
+                        <label for="login-username">Имя пользователя</label>
+                        <input type="text" id="login-username" required>
+                        <div class="error-message" id="login-username-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Пароль</label>
+                        <input type="password" id="login-password" required>
+                        <div class="error-message" id="login-password-error"></div>
+                    </div>
+                    <button type="submit" class="auth-btn" onclick="auth.handleLogin()">Войти</button>
+                    <div class="auth-switch">
+                        Нет аккаунта? <a href="#" onclick="auth.showRegisterForm()">Зарегистрироваться</a>
+                    </div>
+                    <button type="button" class="auth-btn auth-btn--secondary" onclick="auth.hideAuth()">Закрыть</button>
+                </div>
+
+                <div id="register-form" class="auth-form">
+                    <h2>Регистрация</h2>
+                    <div class="form-group">
+                        <label for="register-username">Имя пользователя</label>
+                        <input type="text" id="register-username" required>
+                        <div class="error-message" id="register-username-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Пароль</label>
+                        <input type="password" id="register-password" required>
+                        <div class="error-message" id="register-password-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password-confirm">Подтвердите пароль</label>
+                        <input type="password" id="register-password-confirm" required>
+                        <div class="error-message" id="register-password-confirm-error"></div>
+                    </div>
+                    <button type="submit" class="auth-btn" onclick="auth.handleRegister()">Зарегистрироваться</button>
+                    <div class="auth-switch">
+                        Уже есть аккаунт? <a href="#" onclick="auth.showLoginForm()">Войти</a>
+                    </div>
+                    <button type="button" class="auth-btn auth-btn--secondary" onclick="auth.hideAuth()">Закрыть</button>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+    <div class="footer-content container">
+        <div class="footer-section about">
+            <h3>ProStroy</h3>
+            <p>Лучшая компания по строительству модульных сооружений. Мы создаем будущее вместе с вами.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">VK</a>
+                <a href="#" class="social-link">Telegram</a>
+                <a href="#" class="social-link">Instagram</a>
+            </div>
+        </div>
+        
+        <div class="footer-section navigation">
+            <h4>Навигация</h4>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="materials.html" id="materials-link-footer">Материалы</a></li>
+                <li><a href="visualizer.html">Визуализатор</a></li>
+                <li><a href="#" id="auth-link-footer">Войти</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section contacts">
+            <h4>Контакты</h4>
+            <ul>
+                <li>📞 +7 (999) 123-45-67</li>
+                <li>✉️ info@prostroy.ru</li>
+                <li>📍 Москва, ул. Строителей, 15</li>
+                <li>🕒 Пн-Пт: 9:00-18:00</li>
+            </ul>
+        </div>
+        
+        <div class="footer-section services">
+            <h4>Услуги</h4>
+            <ul>
+                <li>Проектирование</li>
+                <li>Строительство</li>
+                <li>Консультации</li>
+                <li>Доставка материалов</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-bottom container">
+        <p>&copy; 2024 ProStroy. Все права защищены.</p>
+        <div class="footer-links">
+            <a href="#">Политика конфиденциальности</a>
+            <a href="#">Условия использования</a>
+        </div>
+    </div>
+</footer>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            themeManager.init();
+            auth.init();
+            cart.init();
+        });
+    </script>
+</body>
+</html>
