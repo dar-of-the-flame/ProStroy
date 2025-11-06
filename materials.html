@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProStroy - Материалы</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="stylesheet" href="css/visualizer.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="container">
+            <img class="logo" src="img/logo.png" alt="ProStroy">
+            <nav>
+                <ul>
+                    <li class="btn"><a href="index.html">главная</a></li>
+                    <li class="btn"><a href="#" id="auth-link">войти</a></li>
+                    <li class="active"><a href="materials.html">материалы</a></li>
+                    <li class="btn"><a href="visualizer.html">визуализатор</a></li>
+                    <li class="btn"><button id="themeToggle" class="theme-toggle">🌓</button></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Контент для неавторизованных пользователей -->
+        <div id="public-content">
+            <div class="material">
+                <p>Каталог материалов</p>
+            </div>
+
+            <div class="login-prompt container">
+                <h3>Для доступа к каталогу материалов требуется авторизация</h3>
+                <p>Войдите в систему, чтобы просматривать цены, доступность и оформлять заказы</p>
+                <button class="btn" onclick="auth.showAuth()" style="margin-top: 20px;">
+                    <a style="text-decoration: none; color: #228a8a;">Войти в систему</a>
+                </button>
+            </div>
+        </div>
+
+        <!-- Контент для авторизованных пользователей -->
+        <div id="protected-content" class="protected-content">
+            <div class="material">
+                <p>Каталог строительных материалов</p>
+            </div>
+
+            <!-- Фильтры и поиск -->
+            <div class="filter-section container">
+                <h3 style="color: var(--accent-primary); margin-bottom: 15px;">Фильтры и поиск</h3>
+                <div class="filter-controls">
+                    <input type="text" class="search-box" id="search-input" placeholder="Поиск материалов...">
+                    <select class="filter-select" id="category-filter">
+                        <option value="">Все категории</option>
+                        <option value="lumber">Пиломатериалы</option>
+                        <option value="finishing">Отделочные материалы</option>
+                        <option value="foundation">Фундамент</option>
+                        <option value="roofing">Кровельные материалы</option>
+                        <option value="insulation">Утеплители</option>
+                    </select>
+                    <select class="filter-select" id="price-filter">
+                        <option value="">Любая цена</option>
+                        <option value="0-50000">До 50,000 ₽</option>
+                        <option value="50000-150000">50,000 - 150,000 ₽</option>
+                        <option value="150000-300000">150,000 - 300,000 ₽</option>
+                        <option value="300000+">От 300,000 ₽</option>
+                    </select>
+                    <button class="auth-btn" onclick="materials.applyFilters()">Применить</button>
+                    <button class="auth-btn" onclick="materials.resetFilters()" style="background: #ff6633;">Сбросить</button>
+                </div>
+
+                <div class="category-tabs">
+                    <div class="category-tab active" data-category="all">Все материалы</div>
+                    <div class="category-tab" data-category="lumber">Пиломатериалы</div>
+                    <div class="category-tab" data-category="finishing">Отделка</div>
+                    <div class="category-tab" data-category="foundation">Фундамент</div>
+                    <div class="category-tab" data-category="roofing">Кровля</div>
+                    <div class="category-tab" data-category="insulation">Утеплители</div>
+                </div>
+            </div>
+
+            <!-- Сетка материалов -->
+            <div class="materials-grid container" id="materials-grid">
+                <!-- Материалы будут загружены через JavaScript -->
+            </div>
+
+            <!-- Корзина -->
+            <div class="material">
+                <p>Корзина заказов</p>
+            </div>
+            <div class="cart-section container" id="cart-section">
+                <div class="cart-items" id="cart-items">
+                    <!-- Товары будут добавляться через JavaScript -->
+                </div>
+                <div class="cart-total" id="cart-total">
+                    Итого: ₽0
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="card__add" onclick="cart.checkout()" style="background: var(--accent-primary); color: var(--accent-secondary);">
+                        Оформить заказ
+                    </button>
+                    <button class="card__add" onclick="cart.clearCart()" style="background: #ff6633; color: white;">
+                        Очистить корзину
+                    </button>
+                </div>
+            </div>
+
+            <!-- Дополнительная информация -->
+            <div class="material">
+                <p>Условия заказа</p>
+            </div>
+            <div class="filter-section container">
+                <div style="color: var(--text-primary); line-height: 1.6;">
+                    <h4 style="color: var(--accent-primary); margin-bottom: 15px;">Информация о доставке и оплате</h4>
+                    <ul style="list-style-type: none; padding: 0;">
+                        <li style="margin-bottom: 10px;">✓ Бесплатная доставка при заказе от 500,000 ₽</li>
+                        <li style="margin-bottom: 10px;">✓ Скидка 5% при оптовых заказах</li>
+                        <li style="margin-bottom: 10px;">✓ Возможность резерва материалов на складе</li>
+                        <li style="margin-bottom: 10px;">✓ Консультация специалиста по подбору материалов</li>
+                        <li style="margin-bottom: 10px;">✓ Гарантия на все материалы от производителя</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Модальное окно авторизации -->
+        <div id="authModal" class="auth-modal">
+            <div class="auth-container">
+                <div id="login-form" class="auth-form">
+                    <h2>Вход</h2>
+                    <div class="form-group">
+                        <label for="login-username">Имя пользователя</label>
+                        <input type="text" id="login-username" required>
+                        <div class="error-message" id="login-username-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Пароль</label>
+                        <input type="password" id="login-password" required>
+                        <div class="error-message" id="login-password-error"></div>
+                    </div>
+                    <button type="submit" class="auth-btn" onclick="auth.handleLogin()">Войти</button>
+                    <div class="auth-switch">
+                        Нет аккаунта? <a href="#" onclick="auth.showRegisterForm()">Зарегистрироваться</a>
+                    </div>
+                    <button type="button" class="auth-btn auth-btn--secondary" onclick="auth.hideAuth()">Закрыть</button>
+                </div>
+
+                <div id="register-form" class="auth-form">
+                    <h2>Регистрация</h2>
+                    <div class="form-group">
+                        <label for="register-username">Имя пользователя</label>
+                        <input type="text" id="register-username" required>
+                        <div class="error-message" id="register-username-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Пароль</label>
+                        <input type="password" id="register-password" required>
+                        <div class="error-message" id="register-password-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password-confirm">Подтвердите пароль</label>
+                        <input type="password" id="register-password-confirm" required>
+                        <div class="error-message" id="register-password-confirm-error"></div>
+                    </div>
+                    <button type="submit" class="auth-btn" onclick="auth.handleRegister()">Зарегистрироваться</button>
+                    <div class="auth-switch">
+                        Уже есть аккаунт? <a href="#" onclick="auth.showLoginForm()">Войти</a>
+                    </div>
+                    <button type="button" class="auth-btn auth-btn--secondary" onclick="auth.hideAuth()">Закрыть</button>
+                </div>
+            </div>
+        </div>
+
+         <footer class="footer">
+    <div class="footer-content container">
+        <div class="footer-section about">
+            <h3>ProStroy</h3>
+            <p>Лучшая компания по строительству модульных сооружений. Мы создаем будущее вместе с вами.</p>
+            <div class="social-links">
+                <a href="#" class="social-link">VK</a>
+                <a href="#" class="social-link">MAX</a>
+                <a href="#" class="social-link">ГосУслуги</a>
+            </div>
+        </div>
+        
+        <div class="footer-section navigation">
+            <h4>Навигация</h4>
+            <ul>
+                <li><a href="index.html">Главная</a></li>
+                <li><a href="materials.html" id="materials-link-footer">Материалы</a></li>
+                <li><a href="visualizer.html">Визуализатор</a></li>
+                <li><a href="#" id="auth-link-footer">Войти</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-section contacts">
+            <h4>Контакты</h4>
+            <ul>
+                <li>📞 +7 (999) 123-45-67</li>
+                <li>✉️ info@prostroy.ru</li>
+                <li>📍 Чебоксары, Чернышевского 24</li>
+                <li>🕒 Пн-Пт: 12:00-12:01</li>
+            </ul>
+        </div>
+        
+        <div class="footer-section services">
+            <h4>Услуги</h4>
+            <ul>
+                <li>Проектирование</li>
+                <li>Строительство</li>
+                <li>Консультации</li>
+                <li>Доставка материалов</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer-bottom container">
+        <p>&copy; 2024 ProStroy. Все права защищены.</p>
+        <div class="footer-links">
+            <a href="#">Политика конфиденциальности</a>
+            <a href="#">Условия использования</a>
+        </div>
+    </div>
+</footer>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/materials.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            themeManager.init();
+            auth.init();
+            cart.init();
+            materials.init();
+        });
+    </script>
+</body>
+</html>
