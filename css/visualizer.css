@@ -1514,4 +1514,148 @@
 /* Убираем старые мобильные кнопки */
 .mobile-controls {
     display: none !important;
+
+}
+
+
+/* Компактное мобильное управление ПОД областью визуализации */
+.mobile-controls-wrapper-below {
+    width: 100%;
+    margin-top: 15px;
+}
+
+.mobile-controls-below {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: var(--card-bg);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.mobile-controls-compact-below {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.mobile-controls-row-below {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.mobile-btn-compact-below {
+    width: 50px;
+    height: 50px;
+    background: rgba(55, 222, 222, 0.8);
+    border: 2px solid #37dede;
+    border-radius: 8px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    touch-action: manipulation;
+    transition: all 0.2s ease;
+}
+
+.mobile-btn-compact-below:active {
+    background: rgba(55, 222, 222, 1);
+    transform: scale(0.95);
+}
+
+.mobile-btn-alt-below {
+    background: rgba(255, 102, 51, 0.8);
+    border-color: #ff6633;
+}
+
+.mobile-info-panel-below {
+    text-align: center;
+    max-width: 100%;
+}
+
+.mobile-info-text-below {
+    color: var(--text-primary);
+    font-size: 12px;
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+
+.mobile-info-text-below:last-child {
+    margin-bottom: 0;
+}
+
+.mobile-info-text-below strong {
+    color: var(--accent-primary);
+}
+
+/* Адаптивность для очень маленьких экранов */
+@media (max-width: 480px) {
+    .mobile-controls-below {
+        padding: 12px;
+    }
+    
+    .mobile-controls-compact-below {
+        gap: 6px;
+    }
+    
+    .mobile-controls-row-below {
+        gap: 6px;
+    }
+    
+    .mobile-btn-compact-below {
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
+    }
+    
+    .mobile-info-text-below {
+        font-size: 11px;
+    }
+}
+
+/* Горизонтальная ориентация */
+@media (max-height: 500px) and (orientation: landscape) {
+    .mobile-controls-below {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+    }
+    
+    .mobile-controls-compact-below {
+        flex-direction: row;
+        gap: 6px;
+    }
+    
+    .mobile-controls-row-below {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    .mobile-btn-compact-below {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+    
+    .mobile-info-panel-below {
+        text-align: left;
+        max-width: 60%;
+    }
+}
+
+/* Убираем старые мобильные кнопки */
+.mobile-controls {
+    display: none !important;
+}
+
+.mobile-controls-wrapper {
+    display: none !important;
 }
