@@ -121,43 +121,52 @@ class Visualizer {
         this.updateCart();
     }
 
-    // Компактное мобильное управление
+    // Компактное мобильное управление ПОД областью визуализации
     setupMobileControls() {
         if (!this.isMobile) return;
 
-        const container = document.getElementById('visualization3DContainer');
-        if (!container) return;
+        const visualizationArea = document.querySelector('.visualization-area');
+        if (!visualizationArea) return;
 
-        // Создаем компактные кнопки управления
+        // Создаем компактные кнопки управления ПОД областью визуализации
         const mobileControlsHTML = `
-            <div class="mobile-controls-compact">
-                <div class="mobile-controls-row">
-                    <button class="mobile-btn-compact" id="mobileUp">↑</button>
+            <div class="mobile-controls-below">
+                <div class="mobile-controls-compact-below">
+                    <div class="mobile-controls-row-below">
+                        <button class="mobile-btn-compact-below" id="mobileUp">↑</button>
+                    </div>
+                    <div class="mobile-controls-row-below">
+                        <button class="mobile-btn-compact-below" id="mobileLeft">←</button>
+                        <button class="mobile-btn-compact-below" id="mobileDown">↓</button>
+                        <button class="mobile-btn-compact-below" id="mobileRight">→</button>
+                    </div>
+                    <div class="mobile-controls-row-below">
+                        <button class="mobile-btn-compact-below mobile-btn-alt-below" id="mobileRotate">↻</button>
+                        <button class="mobile-btn-compact-below mobile-btn-alt-below" id="mobileDelete">×</button>
+                    </div>
                 </div>
-                <div class="mobile-controls-row">
-                    <button class="mobile-btn-compact" id="mobileLeft">←</button>
-                    <button class="mobile-btn-compact" id="mobileDown">↓</button>
-                    <button class="mobile-btn-compact" id="mobileRight">→</button>
-                </div>
-                <div class="mobile-controls-row">
-                    <button class="mobile-btn-compact mobile-btn-alt" id="mobileRotate">↻</button>
-                    <button class="mobile-btn-compact mobile-btn-alt" id="mobileDelete">×</button>
-                </div>
-            </div>
-            <div class="mobile-info-panel">
-                <div class="mobile-info-text">
-                    <strong>Управление:</strong> Стрелки - движение, ↻ - поворот, × - удалить
-                </div>
-                <div class="mobile-info-text">
-                    <strong>Режимы:</strong> C - коллизии, V - присоединение
+                <div class="mobile-info-panel-below">
+                    <div class="mobile-info-text-below">
+                        <strong>Управление:</strong> Стрелки - движение, ↻ - поворот, × - удалить
+                    </div>
+                    <div class="mobile-info-text-below">
+                        <strong>Режимы:</strong> C - коллизии, V - присоединение
+                    </div>
                 </div>
             </div>
         `;
 
         const controlsWrapper = document.createElement('div');
-        controlsWrapper.className = 'mobile-controls-wrapper';
+        controlsWrapper.className = 'mobile-controls-wrapper-below';
         controlsWrapper.innerHTML = mobileControlsHTML;
-        container.appendChild(controlsWrapper);
+        
+        // Вставляем ПОД областью визуализации, но перед visualization-hint
+        const visualizationHint = visualizationArea.querySelector('.visualization-hint');
+        if (visualizationHint) {
+            visualizationArea.insertBefore(controlsWrapper, visualizationHint);
+        } else {
+            visualizationArea.appendChild(controlsWrapper);
+        }
 
         // Назначаем обработчики
         this.setupMobileButton('mobileUp', 'forward');
