@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProStroy - Профиль</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="container">
+            <img class="logo" src="img/logo.png" alt="ProStroy">
+            <nav>
+                <ul>
+                    <li class="btn"><a href="index.html">главная</a></li>
+                    <li class="btn"><a href="#" id="auth-link">войти</a></li>
+                    <li class="btn"><a href="materials.html">материалы</a></li>
+                    <li class="btn"><a href="visualizer.html">визуализатор</a></li>
+                    <li class="active"><a href="profile.html">профиль</a></li>
+                    <li class="btn"><button id="themeToggle" class="theme-toggle">🌓</button></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div class="material">
+            <p>Личный кабинет</p>
+        </div>
+
+        <!-- Контент для авторизованных пользователей -->
+        <div id="protected-content" class="protected-content">
+            <div id="profile-content" class="container">
+                <!-- Профиль будет загружен через JavaScript -->
+            </div>
+        </div>
+
+        <!-- Контент для неавторизованных пользователей -->
+        <div id="public-content">
+            <div class="login-prompt container">
+                <h3>Для доступа к профилю требуется авторизация</h3>
+                <p>Войдите в систему, чтобы просматривать историю заказов и управлять корзиной</p>
+                <button class="btn" onclick="auth.showAuth()" style="margin-top: 20px;">
+                    Войти в систему
+                </button>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="footer-content container">
+                <div class="footer-section about">
+                    <h3>ProStroy</h3>
+                    <p>Лучшая компания по строительству модульных сооружений. Мы создаем будущее вместе с вами.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">VK</a>
+                        <a href="#" class="social-link">MAX</a>
+                        <a href="#" class="social-link">ГосУслуги</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section navigation">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="materials.html">Материалы</a></li>
+                        <li><a href="visualizer.html">Визуализатор</a></li>
+                        <li><a href="profile.html">Профиль</a></li>
+                        <li><a href="#" id="auth-link-footer">Войти</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section contacts">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li>📞 +7 (999) 123-45-67</li>
+                        <li>✉️ info@prostroy.ru</li>
+                        <li>📍 Чебоксары, Чернышевского 24</li>
+                        <li>🕒 Пн-Пт: 12:00-12:01</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section services">
+                    <h4>Услуги</h4>
+                    <ul>
+                        <li>Проектирование</li>
+                        <li>Строительство</li>
+                        <li>Консультации</li>
+                        <li>Доставка материалов</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom container">
+                <p>&copy; 2025 ProStroy. Все права защищены.</p>
+                <div class="footer-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            themeManager.init();
+            auth.init();
+            
+            // Показываем/скрываем контент в зависимости от авторизации
+            const currentUser = auth.getCurrentUser();
+            const publicContent = document.getElementById('public-content');
+            const protectedContent = document.getElementById('protected-content');
+            
+            if (currentUser) {
+                if (publicContent) publicContent.style.display = 'none';
+                if (protectedContent) protectedContent.style.display = 'block';
+                profile.init();
+            } else {
+                if (publicContent) publicContent.style.display = 'block';
+                if (protectedContent) protectedContent.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

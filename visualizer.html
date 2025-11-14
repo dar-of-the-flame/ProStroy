@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProStroy - Визуализатор</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/auth.css">
+    <link rel="stylesheet" href="./css/visualizer.css">
+    <!-- Подключаем Three.js для 3D графики -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Добавить в visualizer.html -->
+<script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="container">
+            <img class="logo" src="./img/logo.png" alt="ProStroy">
+            <nav>
+                <ul>
+                    <li class="btn"><a href="index.html">главная</a></li>
+                    <li class="btn"><a href="#" id="auth-link">войти</a></li>
+                    <li class="btn"><a href="materials.html">материалы</a></li>
+                    <li class="active"><a href="visualizer.html">визуализатор</a></li>
+                    <li class="btn"><button id="themeToggle" class="theme-toggle">🌓</button></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Контент для неавторизованных пользователей -->
+        <div id="public-content">
+            <div class="material">
+                <p>Визуализатор модульных домов</p>
+            </div>
+
+            <div class="login-prompt container">
+                <h3>Для доступа к визуализатору требуется авторизация</h3>
+                <p>Войдите в систему, чтобы создавать и визуализировать модульные конструкции</p>
+                <button class="btn" onclick="auth.showAuth()" style="margin-top: 20px;">
+                    <a style="text-decoration: none; color: #228a8a;">Войти в систему</a>
+                </button>
+            </div>
+        </div>
+
+        <!-- Контент для авторизованных пользователей -->
+        <div id="protected-content" class="protected-content">
+            <div class="material">
+                <p>Визуализатор модульных домов</p>
+            </div>
+
+            <div class="visualization-container container">
+                <!-- Панель управления слева -->
+                <div class="control-panel">
+                    <h2>Модули</h2>
+                    <div class="modules-grid" id="modulesGrid">
+                        <!-- Модули будут загружены через JavaScript -->
+                    </div>
+                   
+                    <h2>Режим просмотра</h2>
+                    <div class="mode-controls">
+                        <button id="mode2D" class="mode-btn active">2D вид</button>
+                        <button id="mode3D" class="mode-btn">3D вид</button>
+                    </div>
+                   
+                    <h2>Управление</h2>
+                    <button id="deleteSelected" class="remove-btn">Удалить выбранный</button>
+                    <button id="clearAll" class="remove-btn" style="background: #6b7280;">Очистить все</button>
+                   
+                    <div class="visualizer-info">
+                        <h3>Инструкция:</h3>
+                        <ul>
+                            <li>• Кликните на модуль чтобы добавить</li>
+                            <li>• Перетаскивайте модули мышью</li>
+                            <li>• Кликните на модуль для выделения</li>
+                            <li>• Используйте 3D режим для объемного просмотра</li>
+                        </ul>
+                    </div>
+                </div>
+               
+                <!-- Центральная область визуализации -->
+                <div class="visualization-area">
+                    <h2>Область проектирования</h2>
+                   
+                    <!-- Контейнер для 2D визуализации -->
+                    <div class="visualization-container-area" id="visualizationContainer">
+                        <!-- 2D модули будут здесь -->
+                    </div>
+                   
+                    <!-- Контейнер для 3D визуализации (изначально скрыт) -->
+                    <div class="visualization-container-area" id="visualization3DContainer" style="display: none;">
+                        <!-- 3D сцена будет здесь -->
+                    </div>
+                   
+                    <div class="visualization-hint">
+                        <span id="modeHint">📐 Режим 2D: Перетаскивайте модули для перемещения</span>
+                    </div>
+                </div>
+               
+                <!-- Панель корзины справа -->
+                <div class="cart-panel">
+                    <h2>Корзина заказов</h2>
+                    <div class="cart-items" id="cartItems">
+                        <p>Корзина пуста</p>
+                    </div>
+                    <div class="cart-total" id="cartTotal">
+                        Итого: ₽0
+                    </div>
+                    <div class="cart-actions">
+                        <button class="checkout-btn" onclick="visualizer.checkout()">Оформить заказ</button>
+                    </div>
+                   
+                    <div class="project-info">
+                        <h3>Информация о проекте:</h3>
+                        <div class="project-stats">
+                            <div>Модулей: <span id="moduleCount">0</span></div>
+                            <div>Общая площадь: <span id="totalArea">0</span> м²</div>
+                            <div>Стоимость: <span id="projectCost">0</span> ₽</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Панель свойств модуля -->
+            <div class="property-panel" id="propertyPanel" style="display: none;">
+                <!-- Содержимое будет генерироваться динамически -->
+            </div>
+        </div>
+
+        <!-- Модальное окно авторизации -->
+        <div id="authModal" class="auth-modal">
+            <div class="auth-container">
+                <div id="login-form" class="auth-form">
+                    <h2>Вход в систему</h2>
+                    <div class="form-group">
+                        <label for="login-username">Имя пользователя</label>
+                        <input type="text" id="login-username" required>
+                        <div class="error-message" id="login-username-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Пароль</label>
+                        <input type="password" id="login-password" required>
+                        <div class="error-message" id="login-password-error"></div>
+                    </div>
+                    <button type="submit" class="auth-btn" onclick="auth.handleLogin()">Войти</button>
+                    <div class="auth-switch">
+                        Нет аккаунта? <a href="#" onclick="auth.showRegisterForm()">Зарегистрироваться</a>
+                    </div>
+                    <button type="button" class="auth-btn auth-btn--secondary" onclick="auth.hideAuth()">Закрыть</button>
+                </div>
+
+                <div id="register-form" class="auth-form">
+                    <h2>Регистрация</h2>
+                    <div class="form-group">
+                        <label for="register-username">Имя пользователя</label>
+                        <input type="text" id="register-username" required>
+                        <div class="error-message" id="register-username-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">Пароль</label>
+                        <input type="password" id="register-password" required>
+                        <div class="error-message" id="register-password-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password-confirm">Подтвердите пароль</label>
+                        <input type="password" id="register-password-confirm" required>
+                        <div class="error-message" id="register-password-confirm-error"></div>
+                    </div>
+                    <button type="submit" class="auth-btn" onclick="auth.handleRegister()">Зарегистрироваться</button>
+                    <div class="auth-switch">
+                        Уже есть аккаунт? <a href="#" onclick="auth.showLoginForm()">Войти</a>
+                    </div>
+                    <button type="button" class="auth-btn auth-btn--secondary" onclick="auth.hideAuth()">Закрыть</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Футер -->
+        <footer class="footer">
+            <div class="footer-content container">
+                <div class="footer-section about">
+                    <h3>ProStroy</h3>
+                    <p>Лучшая компания по строительству модульных сооружений. Мы создаем будущее вместе с вами.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link">VK</a>
+                        <a href="#" class="social-link">MAX</a>
+                        <a href="#" class="social-link">ГосУслуги</a>
+                    </div>
+                </div>
+               
+                <div class="footer-section navigation">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="materials.html">Материалы</a></li>
+                        <li><a href="visualizer.html">Визуализатор</a></li>
+                        <li><a href="#" onclick="auth.showAuth()">Войти</a></li>
+                    </ul>
+                </div>
+               
+                <div class="footer-section contacts">
+                    <h4>Контакты</h4>
+                    <ul>
+                        <li>📞 +7 (999) 123-45-67</li>
+                        <li>✉️ info@prostroy.ru</li>
+                        <li>📍 Чебоксары, Чернышевского 24</li>
+                        <li>🕒 Пн-Пт: 12:00-12:01</li>
+                    </ul>
+                </div>
+               
+                <div class="footer-section services">
+                    <h4>Услуги</h4>
+                    <ul>
+                        <li>Проектирование</li>
+                        <li>Строительство</li>
+                        <li>Консультации</li>
+                        <li>Доставка материалов</li>
+                    </ul>
+                </div>
+            </div>
+           
+            <div class="footer-bottom container">
+                <p>&copy; 2025 ProStroy. Все права защищены.</p>
+                <div class="footer-links">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Подключаем JavaScript файлы -->
+    <script src="./js/auth.js"></script>
+    <script src="./js/cart.js"></script>
+    <script src="./js/theme.js"></script>
+    <script src="./js/visualizer.js"></script>
+   
+    <script>
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Загрузка ProStroy Visualizer...');
+           
+            // Инициализируем системы
+            themeManager.init();
+            auth.init();
+            cart.init();
+           
+            // Визуализатор автоматически проверит авторизацию при создании
+            // visualizer уже создан при загрузке visualizer.js
+           
+            // Добавляем информацию для отладки
+            const currentUser = auth.getCurrentUser();
+            if (currentUser) {
+                console.log('Пользователь авторизован:', currentUser);
+                console.log('Визуализатор готов к работе');
+            } else {
+                console.log('Пользователь не авторизован');
+            }
+        });
+
+        // Глобальные функции для работы с визуализатором
+        window.refreshVisualizer = function() {
+            if (window.visualizer && auth.getCurrentUser()) {
+                console.log('Обновление визуализатора...');
+                // Здесь можно добавить логику обновления
+            }
+        };
+
+        // Обработчик изменения темы для визуализатора
+        document.addEventListener('themeChanged', function() {
+            if (window.visualizer) {
+                console.log('Тема изменена, обновляем визуализатор...');
+                // Визуализатор может адаптироваться под тему
+            }
+        });
+    </script>
+</body>
+</html>

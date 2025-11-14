@@ -1,0 +1,3033 @@
+@import url('https://fonts.googleapis.com/css2?family=Epunda+Sans:ital,wght@0,300..900;1,300..900&family=Open+Sans:ital,wdth,wght@0,87.5,300..800;1,87.5,300..800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg-primary: #343434;
+    --bg-secondary: #010101;
+    --text-primary: #e0e0e0;
+    --text-secondary: #cccccc;
+    --accent-primary: #37dede;
+    --accent-secondary: #228a8a;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --border-color: #37dede;
+}
+
+[data-theme="light"] {
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --accent-primary: #228a8a;
+    --accent-secondary: #37dede;
+    --card-bg: rgba(0, 0, 0, 0.05);
+    --border-color: #e0e0e0;
+}
+
+body {
+    font-family: "Epunda Sans", sans-serif;
+    font-weight: 400;
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.wrapper{
+    width: 100%;
+    background: var(--bg-primary);
+    transition: background 0.3s ease;
+}
+
+.container{
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 80px;
+}
+
+/* Hero секция с изображением и встроенной шапкой */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    background: 
+        url('../img/glav.jpg') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    transition: background-image 0.5s ease-in-out;
+}
+
+[data-theme="light"] .hero-section {
+    background: 
+        url('../img/glav-light.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+[data-theme="dark"] .hero-section {
+    background: 
+        url('../img/glav.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+/* Плавные переходы для фона */
+.theme-transition {
+    transition: background-image 0.5s ease-in-out !important;
+}
+
+/* Запасной вариант если изображения не загрузятся */
+.hero-fallback-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    opacity: 0;
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+[data-theme="light"] .hero-fallback-bg {
+    opacity: 0.1;
+}
+
+[data-theme="dark"] .hero-fallback-bg {
+    opacity: 0.2;
+}
+
+/* Шапка внутри hero */
+.hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="light"] .hero-header {
+    background-color: rgba(255, 255, 255, 0.4);
+}
+
+.hero-header .logo {
+    width: 180px;
+    height: 180px;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+}
+
+header{
+    padding: 50px 0;
+}
+
+header .logo{
+  width: 100px;
+  height: 100px;
+  padding-left: 80px;
+  text-transform: uppercase;
+  font-size: 30px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+header nav{
+    float: right;
+    width: 45%;
+}
+
+header nav ul{
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+header nav ul li {
+    display: inline-block;
+}
+
+header nav ul li a{
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+/*header nav ul li:not(.active) a:hover {
+    border-bottom: 5px solid var(--accent-primary);
+}*/
+
+header nav ul li.active a{
+    background: var(--accent-primary);
+    padding:7px 15px;
+    border-radius: 6px;
+    color: var(--accent-secondary);
+}
+
+/* Стили для переключения темы */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.theme-toggle:hover {
+    background: rgba(55, 222, 222, 0.2);
+    transform: scale(1.1);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+.hero {
+    padding-bottom: 50px;
+    position: relative;
+    margin-bottom: 120px;
+    background-image: url(../img/glav.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.hero--info{
+    width: 500px;
+    padding-top: 50px;
+}
+
+.hero--info h2{
+    color: var(--accent-primary);
+    font-size: 60px;
+    font-weight: 1000;
+}
+
+.hero--info h1{
+    color: var(--accent-secondary);
+    font-size: 50px;
+    font-weight: 400;
+}
+
+.hero--info p{
+    color: var(--accent-secondary);
+    font-size: 30px;
+    font-weight: 400;
+}
+
+.hero--info .btn{
+    background: var(--accent-primary);
+    color: var(--accent-secondary);
+    padding:7px 15px;
+    border-radius: 8px;
+    font-size: 30px;
+    border: 0;
+    transition: all 500ms ease;
+}
+
+.hero--info .btn:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.hero-header nav {
+    float: right;
+    width: 45%;
+}
+
+.hero-header nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+.hero-header nav ul li {
+    display: inline-block;
+}
+
+.hero-header nav ul li a {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.hero-header nav ul li:not(.active) a:hover {
+    border-bottom: 5px solid var(--accent-primary);
+}
+
+.hero-header nav ul li.active a {
+    background: var(--accent-primary);
+    padding: 7px 15px;
+    border-radius: 6px;
+    color: var(--accent-secondary);
+}
+
+/* Контент hero */
+.hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 5%;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.theme-transition .hero-content {
+    opacity: 0.7;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: var(--accent-primary);
+}
+
+.hero-btn {
+    background: var(--accent-primary);
+    color: var(--accent-secondary);
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 20px;
+    border: 0;
+    transition: all 500ms ease;
+    cursor: pointer;
+}
+
+.hero-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Остальные стили для остальной части страницы */
+.material {
+    text-align: center;
+    color: var(--accent-primary);
+    font-size: 80px;
+    margin: auto;
+    margin-bottom: 120px;
+}
+
+/* Слайдшоу */
+.slideshow-container {
+    width: 100%;
+    margin: 50px 0;
+}
+
+.slideshow {
+    width: 1300px;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    margin: auto;
+}
+
+.slideshow-item {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    opacity: 0;
+    animation: slideanim 40s infinite;
+    pointer-events: none;
+}
+
+.slideshow-item:nth-child(1),
+.slideshow-item:nth-child(1) img {
+    animation-delay: 0;
+}
+
+.slideshow-item:nth-child(2),
+.slideshow-item:nth-child(2) img {
+    animation-delay: 10s;
+}
+
+.slideshow-item:nth-child(3),
+.slideshow-item:nth-child(3) img {
+    animation-delay: 20s;
+}
+
+.slideshow-item:nth-child(4),
+.slideshow-item:nth-child(4) img {
+    animation-delay: 30s;
+}
+
+.slideshow-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    animation: zoom 40s infinite;
+}
+
+.slideshow-item-text {
+    max-width: 50%;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(0,0,0,0.7);
+    color: #fff;
+    padding: 20px 30px;
+    font-family: Verdana, sans-serif; 
+}
+
+.slideshow-item-text h5 {
+    font-size: 22px;
+    margin: 0 0 10px 0;
+    color: #BFE2FF;
+}
+
+.slideshow-item-text p {
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+
+@keyframes slideanim {
+    12.5%{
+        opacity: 1;
+        pointer-events: auto;
+    }
+    25%{
+        opacity: 1;
+        pointer-events: auto;
+    } 
+    37.5%{
+        opacity: 0;
+    }
+}
+
+@keyframes zoom {
+    50%{
+        transform: scale(1.3);
+    } 
+}
+
+@media screen and (max-width: 1100px){
+    .slideshow-item-text{
+        max-width: 75%;
+    }
+}
+@media screen and (max-width: 456px){
+    .slideshow-item-text {
+        bottom: 0;
+        left: 0;
+        max-width: 100%;
+    }
+    .slideshow-item-text h5 {
+        font-size: 18px;
+    }
+    .slideshow-item-text p {
+        font-size: 13px;
+    }
+}
+
+/* Секция преимуществ */
+.features-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 30px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--border-color);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(55, 222, 222, 0.2);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    color: var(--accent-primary);
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+}
+
+.feature-card p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+/* Карточки товаров */
+.card {
+    width: 225px;
+    min-height: 350px;
+    box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    border-radius: 4px;
+    transition: 0.2s;
+    position: relative;
+    margin-top: 120px;
+    margin-left: 80px;
+    background: var(--card-bg);
+}
+
+.card:hover {
+    box-shadow: 4px 8px 16px rgba(255, 102, 51, 0.2);
+}
+
+.card__top {
+    flex: 0 0 220px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card__image {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.card__image > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: 0.2s;
+}
+
+.card__image:hover > img {
+    transform: scale(1.1);
+}
+
+.card__label {
+    padding: 4px 8px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    background: #ff6633;
+    border-radius: 4px;
+    font-weight: 400;
+    font-size: 16px;
+    color: #fff;
+}
+
+.card__bottom {
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 auto;
+    padding: 10px;
+}
+
+.card__prices {
+    display: flex;
+    margin-bottom: 10px;
+    flex: 0 0 50%;
+}
+
+.card__price::after {
+    content: "₽";
+    margin-left: 4px;
+    position: relative;
+}
+
+.card__price--discount {
+    font-weight: 700;
+    font-size: 19px;
+    color: var(--text-primary);
+    display: flex;
+    flex-wrap: wrap-reverse;
+}
+
+.card__price--discount::before {
+    content: "Со скидкой";
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.card__price--common {
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--text-secondary);
+    display: flex;
+    flex-wrap: wrap-reverse;
+    justify-content: flex-end;
+}
+
+.card__price--common::before {
+    content: "Обычная";
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.card__title {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 150%;
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+.card__title:hover {
+    color: #ff6633;
+}
+
+.card__add {
+    display: block;
+    width: 100%;
+    font-weight: 400;
+    font-size: 17px;
+    color: var(--accent-primary);
+    padding: 10px;
+    text-align: center;
+    border: 1px solid var(--accent-primary);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: auto;
+    background: none;
+    text-decoration: none;
+}
+
+.card__add:hover {
+    border: 1px solid #ff6633;
+    background-color: #ff6633;
+    color: #fff;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 225px);
+    width: 100%;
+    max-width: 1000px;
+    justify-content: center;
+    justify-items: center;
+    column-gap: 30px;
+    row-gap: 40px;
+    margin: auto;
+}
+
+.magazin {
+    text-align: center;
+    margin-left: 700px;
+    margin-right: 700px;
+    margin-top: 120px;
+    margin-bottom: 180px;
+}
+
+.protected-content {
+    display: none;
+}
+
+.login-prompt {
+    text-align: center;
+    padding: 50px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    margin: 20px 0;
+    border: 1px solid var(--border-color);
+}
+
+.cart-section {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 30px 0;
+    border: 1px solid var(--border-color);
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid var(--accent-primary);
+}
+
+.cart-total {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+    color: var(--accent-primary);
+}
+
+.filter-section {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid var(--border-color);
+}
+
+.filter-controls {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-select {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 8px 12px;
+    color: var(--text-primary);
+    min-width: 150px;
+}
+
+.search-box {
+    flex: 1;
+    min-width: 200px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 8px 12px;
+    color: var(--text-primary);
+}
+
+.category-tabs {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.category-tab {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: var(--text-primary);
+}
+
+.category-tab.active {
+    background: var(--accent-primary);
+    color: var(--accent-secondary);
+}
+
+.materials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    margin: 30px 0;
+}
+
+/* Футер */
+.footer {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    margin-top: 80px;
+    padding: 50px 0 20px;
+    border-top: 2px solid var(--accent-primary);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.footer-section h3 {
+    color: var(--accent-primary);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.footer-section h4 {
+    color: var(--accent-primary);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--accent-primary);
+    padding-bottom: 10px;
+}
+
+.footer-section p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+    color: var(--text-secondary);
+}
+
+.footer-section ul li a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section ul li a:hover {
+    color: var(--accent-primary);
+}
+
+/* Контакты и другие списки */
+.footer-section ul li {
+    color: var(--text-secondary);
+}
+
+/* Специфичные стили для контактов с иконками */
+.footer-section.contacts ul li,
+.footer-section.services ul li {
+    color: var(--text-secondary);
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.social-link {
+    background: rgba(55, 222, 222, 0.1);
+    color: var(--accent-primary);
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s;
+    border: 1px solid var(--accent-primary);
+}
+
+.social-link:hover {
+    background: var(--accent-primary);
+    color: var(--accent-secondary);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-bottom p {
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: var(--accent-primary);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+    
+    .hero-header {
+        flex-direction: column;
+        padding: 10px 5%;
+    }
+    
+    .hero-header nav {
+        width: 100%;
+        margin-top: 20px;
+    }
+    
+    .hero-header nav ul {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .features-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .slideshow {
+        width: 95%;
+        height: 300px;
+    }
+    
+    .magazin {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-section {
+        text-align: center;
+    }
+    
+    .social-links {
+        flex-wrap: wrap;
+    }
+    
+    .material {
+        font-size: 50px;
+    }
+    
+    .card {
+        margin-left: 0;
+    }
+}
+
+/* Дополнительные стили для лучшей поддержки тем в футере */
+.footer-section.about p {
+    color: var(--text-secondary);
+}
+
+.footer-section.navigation ul li a {
+    color: var(--text-secondary);
+}
+
+.footer-section.navigation ul li a:hover {
+    color: var(--accent-primary);
+}
+
+.footer-section.contacts ul li,
+.footer-section.services ul li {
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+/* Иконки в контактах */
+.footer-section.contacts ul li::before {
+    margin-right: 8px;
+}
+
+/* Адаптивность футера */
+@media (max-width: 768px) {
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .footer-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-section {
+        text-align: center;
+    }
+    
+    .social-links {
+        flex-wrap: wrap;
+    }
+}
+
+/* Плавные переходы для всего футера */
+.footer,
+.footer-section h3,
+.footer-section h4,
+.footer-section p,
+.footer-section ul li,
+.footer-section ul li a,
+.footer-bottom p,
+.footer-links a,
+.social-link {
+    transition: all 0.3s ease;
+}
+
+/* ==================== */
+/* МОБИЛЬНАЯ АДАПТАЦИЯ */
+/* ==================== */
+
+@media (max-width: 768px) {
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    /* Герой секция */
+    .hero-section {
+        height: 70vh;
+        min-height: 500px;
+    }
+    
+    .hero-header {
+        padding: 10px 15px;
+        flex-direction: column;
+    }
+    
+    .hero-header .logo {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 15px;
+    }
+    
+    .hero-header nav {
+        width: 100%;
+    }
+    
+    .hero-header nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .hero-header nav ul li {
+        margin: 5px;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+        margin-bottom: 20px;
+    }
+    
+    .hero-content p {
+        font-size: 1.1rem;
+        padding: 0 20px;
+    }
+    
+    /* Заголовки */
+    .material {
+        font-size: 40px !important;
+        margin-bottom: 60px !important;
+    }
+    
+    /* Навигация в хедере */
+    header nav {
+        float: none;
+        width: 100%;
+        margin-top: 20px;
+    }
+    
+    header nav ul {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    header .logo {
+        padding-left: 15px;
+        width: 80px;
+        height: 80px;
+    }
+    
+    /* Карточки товаров */
+    .cards {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 0 15px;
+    }
+    
+    .card {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 60px;
+    }
+    
+    /* Слайдшоу */
+    .slideshow {
+        width: 100%;
+        height: 300px;
+    }
+    
+    .slideshow-item-text {
+        max-width: 90%;
+        bottom: 10px;
+        left: 10px;
+        padding: 15px;
+    }
+    
+    .slideshow-item-text h3 {
+        font-size: 18px;
+    }
+    
+    .slideshow-item-text p {
+        font-size: 14px;
+    }
+    
+    /* Кнопка "Смотреть ещё" */
+    .magazin {
+        margin: 80px 20px !important;
+    }
+    
+    /* Фильтры */
+    .filter-controls {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .search-box, .filter-select {
+        min-width: 100%;
+    }
+    
+    .category-tabs {
+        justify-content: center;
+    }
+    
+    .category-tab {
+        font-size: 14px;
+        padding: 6px 12px;
+    }
+    
+    /* Сетка материалов */
+    .materials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 10px;
+    }
+    
+    /* Корзина */
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .cart-section {
+        padding: 15px;
+    }
+    
+    /* Футер */
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        text-align: center;
+    }
+    
+    .footer-section {
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+}
+
+/* Особые стили для очень маленьких экранов */
+@media (max-width: 480px) {
+    .hero-section {
+        height: 60vh;
+        min-height: 400px;
+    }
+    
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+    
+    .hero-content p {
+        font-size: 1rem;
+    }
+    
+    .material {
+        font-size: 32px !important;
+        margin-bottom: 40px !important;
+    }
+    
+    header nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    header nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .slideshow {
+        height: 250px;
+    }
+    
+    .slideshow-item-text {
+        padding: 10px;
+    }
+    
+    .slideshow-item-text h3 {
+font-size: 16px;
+    }
+    
+    .category-tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .category-tab {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    
+    /* Улучшаем отображение карточек товаров */
+    .card__top {
+        flex: 0 0 180px;
+    }
+    
+    .card__title {
+        font-size: 15px;
+    }
+    
+    .card__add {
+        font-size: 15px;
+        padding: 8px;
+    }
+}
+
+/* Горизонтальная ориентация на мобильных */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-section {
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .hero-header {
+        padding: 10px 5%;
+    }
+    
+    .hero-content {
+        padding: 50px 5% 30px;
+    }
+}
+
+/* Улучшения для тач-устройств */
+@media (hover: none) and (pointer: coarse) {
+    .card__add, .auth-btn, .hero-btn, .theme-toggle {
+        min-height: 44px; /* Минимальный размер для касания */
+        padding: 12px 20px;
+    }
+    
+    .card__image:hover > img {
+        transform: none; /* Убираем ховер-эффекты на тач-устройствах */
+    }
+    
+    .feature-card:hover {
+        transform: none;
+    }
+    
+    /* Увеличиваем зоны клика для мобильных */
+    header nav ul li a {
+        padding: 10px 15px;
+        display: block;
+    }
+    
+    .category-tab {
+        padding: 12px 20px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Предотвращаем масштабирование при фокусе на iOS */
+input, select, textarea {
+    font-size: 16px;
+}
+
+
+/* Мобильное меню */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.mobile-menu-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--text-primary);
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+.mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-secondary);
+    z-index: 1000;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.mobile-menu.active {
+    display: flex;
+}
+
+.mobile-menu ul {
+    list-style: none;
+    text-align: center;
+}
+
+.mobile-menu ul li {
+    margin: 20px 0;
+}
+
+.mobile-menu ul li a {
+    color: var(--text-primary);
+    text-decoration: none;
+    font-size: 1.5rem;
+    display: block;
+    padding: 15px 30px;
+}
+
+.mobile-menu ul li .theme-toggle {
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 15px 30px;
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+    
+    header nav ul {
+        display: none;
+    }
+    
+    .hero-header nav ul {
+        display: none;
+    }
+}
+
+/* Улучшения для iOS */
+body {
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Убираем подсветку при тапе на iOS */
+button, a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Улучшаем скроллбар */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-primary);
+    border-radius: 3px;
+}
+
+/* Исправления для светлой темы - текст и границы */
+[data-theme="light"] {
+    --bg-primary: #f5f5f5;
+    --bg-secondary: #ffffff;
+    --text-primary: #333333;
+    --text-secondary: #666666;
+    --accent-primary: #228a8a;
+    --accent-secondary: #37dede;
+    --card-bg: rgba(0, 0, 0, 0.05);
+    --border-color: #cccccc; /* Увеличена контрастность */
+}
+
+/* Улучшение видимости текста в светлой теме */
+[data-theme="light"] .hero-header nav ul li a,
+[data-theme="light"] header nav ul li a {
+    color: var(--text-primary);
+    font-weight: 500; /* Увеличиваем жирность для лучшей читаемости */
+}
+
+[data-theme="light"] .hero-header,
+[data-theme="light"] header {
+    background-color: rgba(255, 255, 255, 0.95); /* Более непрозрачный фон */
+}
+
+[data-theme="light"] .material {
+    color: var(--accent-primary);
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1); /* Легкая тень для контраста */
+}
+
+[data-theme="light"] .card__title,
+[data-theme="light"] .card__price--discount,
+[data-theme="light"] .card__price--common {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .feature-card,
+[data-theme="light"] .login-prompt,
+[data-theme="light"] .cart-section,
+[data-theme="light"] .filter-section {
+    border: 2px solid var(--border-color); /* Более толстая граница */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Добавляем тень */
+}
+
+[data-theme="light"] .footer {
+    background: var(--bg-secondary);
+    border-top: 3px solid var(--accent-primary); /* Более толстая граница */
+}
+
+[data-theme="light"] .footer-section h3,
+[data-theme="light"] .footer-section h4,
+[data-theme="light"] .footer-section p,
+[data-theme="light"] .footer-section ul li {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] .social-link {
+    background: rgba(34, 138, 138, 0.1);
+    color: var(--accent-primary);
+    border: 2px solid var(--accent-primary); /* Более толстая граница */
+}
+
+/* Визуализатор - светлая тема */
+[data-theme="light"] .control-panel,
+[data-theme="light"] .visualization-area,
+[data-theme="light"] .cart-panel {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+[data-theme="light"] .module-item {
+    border: 2px solid var(--border-color);
+    background: var(--bg-secondary);
+}
+
+[data-theme="light"] .module-item:hover {
+    border-color: var(--accent-primary);
+    background: rgba(34, 138, 138, 0.05);
+}
+
+[data-theme="light"] .visualization-container-area {
+    background: 
+        linear-gradient(45deg, rgba(0,0,0,0.05) 25%, transparent 25%), 
+        linear-gradient(-45deg, rgba(0,0,0,0.05) 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.05) 75%), 
+        linear-gradient(-45deg, transparent 75%, rgba(0,0,0,0.05) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    border: 2px solid var(--border-color);
+}
+
+/* Улучшение контрастности для модальных окон */
+[data-theme="light"] .auth-container {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+
+[data-theme="light"] .auth-form h2 {
+    color: var(--accent-primary);
+}
+
+[data-theme="light"] .form-group label {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+[data-theme="light"] .form-group input {
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+/* Улучшение видимости кнопок */
+[data-theme="light"] .btn,
+[data-theme="light"] .auth-btn {
+    font-weight: 600;
+    border: 2px solid transparent;
+}
+
+[data-theme="light"] .btn:hover,
+[data-theme="light"] .auth-btn:hover {
+    border-color: var(--accent-primary);
+}
+
+/* Улучшение текста в слайдшоу для светлой темы */
+[data-theme="light"] .slideshow-item-text {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333333;
+}
+
+[data-theme="light"] .slideshow-item-text h3 {
+    color: #228a8a;
+}
+
+/* Улучшение видимости активных элементов навигации */
+[data-theme="light"] header nav ul li.active a {
+    background: var(--accent-primary);
+    color: white;
+    font-weight: 600;
+}
+
+/* Улучшение видимости в фильтрах */
+[data-theme="light"] .filter-select,
+[data-theme="light"] .search-box {
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+[data-theme="light"] .category-tab.active {
+    background: var(--accent-primary);
+    color: white;
+    font-weight: 600;
+}
+
+/* Убираем обводку при наведении в светлой теме
+[data-theme="light"] header nav ul li:not(.active) a:hover,
+[data-theme="light"] .hero-header nav ul li:not(.active) a:hover {
+    border-bottom: none;
+    color: var(--accent-primary);
+}*/
+
+/* Альтернативный эффект при наведении для светлой темы 
+[data-theme="light"] header nav ul li:not(.active) a:hover,
+[data-theme="light"] .hero-header nav ul li:not(.active) a:hover {
+    background: rgba(34, 138, 138, 0.1);
+    border-radius: 4px;
+    padding: 5px 10px;
+}*/
+
+
+
+/* Исправления для навигации - возвращаем подчеркивание и убираем контуры */
+header nav ul li:not(.active) a:hover,
+.hero-header nav ul li:not(.active) a:hover {
+    border-bottom: 5px solid var(--accent-primary) !important;
+    background: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Убираем контуры для всех состояний */
+header nav ul li a,
+.hero-header nav ul li a {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Убираем контуры при фокусе */
+header nav ul li a:focus,
+.hero-header nav ul li a:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Для светлой темы - сохраняем подчеркивание */
+[data-theme="light"] header nav ul li:not(.active) a:hover,
+[data-theme="light"] .hero-header nav ul li:not(.active) a:hover {
+    border-bottom: 5px solid var(--accent-primary) !important;
+    background: none !important;
+    outline: none !important;
+    box-shadow: none !important;
+    color: var(--text-primary);
+}
+
+/* Убираем контуры для кнопок */
+.btn, .theme-toggle, .card__add, .auth-btn, .hero-btn {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.btn:focus, .theme-toggle:focus, .card__add:focus, .auth-btn:focus, .hero-btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Убираем контуры для мобильного меню */
+.mobile-menu-toggle, .mobile-menu a, .mobile-menu .theme-toggle {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* ==================== */
+/* ИСПРАВЛЕНИЯ КОНТУРОВ И СДВИГА ТЕКСТА */
+/* ==================== */
+
+/* Полное удаление всех контуров для всех элементов */
+*:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Убираем контуры для всех ссылок и кнопок навигации */
+header nav ul li a,
+.hero-header nav ul li a,
+.btn, 
+.theme-toggle, 
+.card__add, 
+.auth-btn, 
+.hero-btn,
+.mobile-menu a,
+.mobile-menu-toggle {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Убираем контуры при фокусе */
+header nav ul li a:focus,
+.hero-header nav ul li a:focus,
+.btn:focus, 
+.theme-toggle:focus, 
+.card__add:focus, 
+.auth-btn:focus, 
+.hero-btn:focus,
+.mobile-menu a:focus,
+.mobile-menu-toggle:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Убираем стандартные стили браузера для кнопок */
+button {
+    border: none;
+    background: none;
+    outline: none !important;
+}
+
+/* Исправляем наведение для навигации - предотвращаем сдвиг текста */
+header nav ul li:not(.active) a,
+.hero-header nav ul li:not(.active) a {
+    position: relative;
+    padding: 5px 0 !important; /* Фиксированные отступы */
+    margin: 0 5px !important;
+    transition: all 0.3s ease !important;
+    border-bottom: 2px solid transparent !important; /* Прозрачная граница для сохранения размера */
+}
+
+/* Подчеркивание при наведении без сдвига текста */
+header nav ul li:not(.active) a:hover,
+.hero-header nav ul li:not(.active) a:hover {
+    border-bottom: 2px solid var(--accent-primary) !important;
+    background: none !important;
+    padding: 5px 0 !important; /* Сохраняем те же отступы */
+    transform: none !important;
+    color: var(--text-primary) !important;
+}
+
+/* Для светлой темы - специальные исправления */
+[data-theme="light"] header nav ul li:not(.active) a,
+[data-theme="light"] .hero-header nav ul li:not(.active) a {
+    border-bottom: 2px solid transparent !important;
+    padding: 5px 0 !important;
+}
+
+[data-theme="light"] header nav ul li:not(.active) a:hover,
+[data-theme="light"] .hero-header nav ul li:not(.active) a:hover {
+    border-bottom: 2px solid var(--accent-primary) !important;
+    background: none !important;
+    padding: 5px 0 !important;
+    color: var(--text-primary) !important;
+    /* Убираем любые трансформации которые могут вызывать сдвиг */
+    transform: none !important;
+    margin: 0 5px !important;
+}
+
+/* Активные элементы - без изменений */
+header nav ul li.active a,
+.hero-header nav ul li.active a {
+    background: var(--accent-primary) !important;
+    padding: 7px 15px !important;
+    border-radius: 6px !important;
+    color: var(--accent-secondary) !important;
+    border-bottom: none !important;
+}
+
+/* Убираем контуры для инпутов и селектов */
+input, select, textarea {
+    outline: none !important;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: var(--accent-primary) !important;
+}
+
+/* Убираем стандартный синий контур в Chrome */
+button:focus,
+a:focus {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+/* Исправление для мобильного меню */
+.mobile-menu ul li a {
+    padding: 15px 30px !important;
+    border-bottom: 2px solid transparent !important;
+    transition: border-color 0.3s ease !important;
+}
+
+.mobile-menu ul li a:hover {
+    border-bottom: 2px solid var(--accent-primary) !important;
+    background: none !important;
+}
+
+/* Убираем контуры для карточек и других интерактивных элементов */
+.card, .feature-card, .module-item, .category-tab {
+    outline: none !important;
+}
+
+.card:focus, .feature-card:focus, .module-item:focus, .category-tab:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Исправление для кнопки темы */
+.theme-toggle {
+    border: none !important;
+    background: none !important;
+    padding: 5px 10px !important;
+}
+
+.theme-toggle:hover {
+    background: rgba(55, 222, 222, 0.2) !important;
+    transform: scale(1.1) !important;
+}
+
+.theme-toggle:active {
+    transform: scale(0.95) !important;
+}
+
+/* Убираем контуры в визуализаторе */
+#visualization3DContainer, 
+#visualizationContainer,
+.module,
+.mode-btn,
+.remove-btn,
+.checkout-btn {
+    outline: none !important;
+}
+
+#visualization3DContainer:focus, 
+#visualizationContainer:focus,
+.module:focus,
+.mode-btn:focus,
+.remove-btn:focus,
+.checkout-btn:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Стили для профиля */
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--accent-primary);
+}
+
+.profile-sections {
+    display: grid;
+    gap: 30px;
+}
+
+.profile-section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.profile-section h3 {
+    color: var(--accent-primary);
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+.cart-summary {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.cart-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background: var(--bg-primary);
+    border-radius: 6px;
+}
+
+.stat-item.total {
+    background: var(--accent-primary);
+    color: var(--accent-secondary);
+    font-weight: bold;
+}
+
+.cart-items-detailed {
+    margin: 20px 0;
+}
+
+.cart-item-detailed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    margin-bottom: 8px;
+    background: var(--bg-primary);
+    border-radius: 6px;
+    border-left: 4px solid var(--accent-primary);
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.item-name {
+    font-weight: bold;
+}
+
+.item-type {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: var(--accent-primary);
+    color: var(--accent-secondary);
+    width: fit-content;
+}
+
+.item-type.material {
+    background: #4CAF50;
+}
+
+.item-type.module {
+    background: #2196F3;
+}
+
+.cart-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Стили для заказов */
+.order-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+}
+
+.order-card.pending {
+    border-left: 4px solid #FFA500;
+}
+
+.order-card.completed {
+    border-left: 4px solid #4CAF50;
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.order-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.order-date {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.order-total {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent-primary);
+}
+
+.order-items {
+    margin: 15px 0;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.item-type-badge {
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    background: var(--accent-primary);
+    color: var(--accent-secondary);
+}
+
+.item-type-badge.material {
+    background: #4CAF50;
+}
+
+.item-type-badge.module {
+    background: #2196F3;
+}
+
+.order-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.order-status {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.order-status.pending {
+    background: #FFF3CD;
+    color: #856404;
+}
+
+.order-status.completed {
+    background: #D4EDDA;
+    color: #155724;
+}
+
+.empty-message {
+    text-align: center;
+    color: var(--text-secondary);
+    font-style: italic;
+    padding: 40px;
+}
+
+/* Адаптивность профиля */
+@media (max-width: 768px) {
+    .profile-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .cart-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .cart-actions,
+    .order-actions {
+        flex-direction: column;
+    }
+    
+    .order-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+}
+
+
+/* ==================== */
+/* УБИРАЕМ КОНТУРЫ ПРИ НАВЕДЕНИИ */
+/* ==================== */
+
+/* Убираем все контуры и обводки при наведении */
+header nav ul li a:hover,
+.hero-header nav ul li a:hover,
+.btn:hover,
+.theme-toggle:hover,
+.card__add:hover,
+.auth-btn:hover,
+.hero-btn:hover {
+    outline: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+}
+
+/* Убираем стандартные подчеркивания ссылок */
+header nav ul li a,
+.hero-header nav ul li a {
+    text-decoration: none !important;
+}
+
+/* Сохраняем только цветовое изменение при наведении для неактивных пунктов */
+header nav ul li:not(.active) a:hover,
+.hero-header nav ul li:not(.active) a:hover {
+    color: var(--accent-primary) !important;
+    background: none !important;
+    border-bottom: none !important;
+}
+
+/* Для светлой темы */
+[data-theme="light"] header nav ul li:not(.active) a:hover,
+[data-theme="light"] .hero-header nav ul li:not(.active) a:hover {
+    color: var(--accent-primary) !important;
+    background: none !important;
+    border-bottom: none !important;
+}
+
+/* Убираем контуры для мобильного меню */
+.mobile-menu a:hover,
+.mobile-menu .theme-toggle:hover {
+    outline: none !important;
+    box-shadow: none !important;
+    background: none !important;
+}
+
+/* Убираем контуры для кнопок в футере */
+.footer-section.navigation ul li a:hover,
+.social-link:hover {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Сохраняем только цветовое изменение для социальных ссылок */
+.social-link:hover {
+    background: var(--accent-primary) !important;
+    color: var(--accent-secondary) !important;
+    transform: translateY(-2px);
+}
+
+/* ==================== */
+/* УБИРАЕМ КОНТУРЫ ПРИ НАВЕДЕНИИ НА КНОПКИ В ВЕРХНЕЙ ЧАСТИ */
+/* ==================== */
+
+/* Убираем все контуры и обводки при наведении на элементы навигации */
+header nav ul li a:hover,
+.hero-header nav ul li a:hover,
+header nav ul li.btn a:hover,
+.hero-header nav ul li.btn a:hover,
+.theme-toggle:hover {
+    outline: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    border: none !important;
+}
+
+/* Убираем стандартные подчеркивания ссылок в навигации */
+header nav ul li a,
+.hero-header nav ul li a {
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+/* Убираем контуры при фокусе */
+header nav ul li a:focus,
+.hero-header nav ul li a:focus,
+.theme-toggle:focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Сохраняем только цветовое изменение при наведении для неактивных пунктов */
+header nav ul li:not(.active) a:hover,
+.hero-header nav ul li:not(.active) a:hover {
+    color: var(--accent-primary) !important;
+    background: none !important;
+    border-bottom: none !important;
+    transform: none !important;
+}
+
+/* Для светлой темы */
+[data-theme="light"] header nav ul li:not(.active) a:hover,
+[data-theme="light"] .hero-header nav ul li:not(.active) a:hover {
+    color: var(--accent-primary) !important;
+    background: none !important;
+    border-bottom: none !important;
+}
+
+/* Убираем контуры для кнопки темы */
+.theme-toggle {
+    border: none !important;
+    background: none !important;
+    outline: none !important;
+}
+
+.theme-toggle:hover {
+    background: rgba(55, 222, 222, 0.2) !important;
+    transform: scale(1.1) !important;
+}
+
+.theme-toggle:active {
+    transform: scale(0.95) !important;
+}
+
+/* Убираем контуры для мобильного меню */
+.mobile-menu-toggle:hover {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Убираем стандартный синий контур в Chrome */
+button:focus,
+a:focus {
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-focus-ring-color: transparent !important;
+}
+
+
+/* ==================== */
+/* УЛУЧШЕНИЯ ДЛЯ МОБИЛЬНОЙ ВЕРСИИ */
+/* ==================== */
+
+@media (max-width: 768px) {
+    /* Улучшаем мобильное меню */
+    .mobile-menu-toggle {
+        display: flex !important;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 1001;
+    }
+
+    .mobile-menu-toggle span {
+        width: 25px;
+        height: 3px;
+        background: var(--text-primary);
+        margin: 3px 0;
+        transition: 0.3s;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    .mobile-menu {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--bg-secondary);
+        z-index: 1000;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .mobile-menu.active {
+        display: flex;
+    }
+
+    .mobile-menu ul {
+        list-style: none;
+        text-align: center;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    .mobile-menu ul li {
+        margin: 15px 0;
+        width: 100%;
+    }
+
+    .mobile-menu ul li a {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 1.3rem;
+        display: block;
+        padding: 15px 30px;
+        transition: background-color 0.3s;
+    }
+
+    .mobile-menu ul li a:hover {
+        background: rgba(55, 222, 222, 0.1);
+    }
+
+    .mobile-menu ul li .theme-toggle {
+        font-size: 1.3rem;
+        background: none;
+        border: none;
+        color: var(--text-primary);
+        cursor: pointer;
+        padding: 15px 30px;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* Скрываем десктопную навигацию на мобильных */
+    header nav ul,
+    .hero-header nav ul {
+        display: none !important;
+    }
+
+    /* Улучшаем отображение карточек на мобильных */
+    .cards {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        padding: 0 10px !important;
+    }
+
+    .card {
+        width: 100% !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* Улучшаем фильтры на мобильных */
+    .filter-controls {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .search-box, .filter-select {
+        min-width: 100% !important;
+        font-size: 16px !important; /* Убираем zoom на iOS */
+    }
+
+    .category-tabs {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+    }
+
+    .category-tab {
+        flex: 1 0 45% !important;
+        margin: 5px !important;
+        text-align: center !important;
+        min-height: 44px !important; /* Минимальный размер для касания */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Улучшаем отображение профиля на мобильных */
+    .profile-header {
+        flex-direction: column !important;
+        gap: 15px !important;
+        text-align: center !important;
+    }
+
+    .cart-stats {
+        grid-template-columns: 1fr !important;
+    }
+
+    .cart-actions,
+    .order-actions {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    .order-header {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 10px !important;
+    }
+
+    /* Улучшаем модальное окно авторизации */
+    .auth-container {
+        margin: 20px auto !important;
+        width: 90% !important;
+        max-width: none !important;
+        padding: 20px !important;
+    }
+
+    .auth-form h2 {
+        font-size: 1.5rem !important;
+    }
+
+    .form-group input {
+        padding: 12px !important;
+        font-size: 16px !important; /* Убираем zoom на iOS */
+    }
+
+    .auth-btn {
+        padding: 12px !important;
+        font-size: 16px !important;
+        min-height: 44px !important;
+    }
+
+    /* Улучшаем футер на мобильных */
+    .footer-content {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+        text-align: center !important;
+    }
+
+    .footer-bottom {
+        flex-direction: column !important;
+        gap: 15px !important;
+        text-align: center !important;
+    }
+
+    .footer-links {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    /* Улучшаем кнопки для касания */
+    .btn, .card__add, .auth-btn, .hero-btn {
+        min-height: 44px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Убираем ховер-эффекты на тач-устройствах */
+    @media (hover: none) and (pointer: coarse) {
+        .card__image:hover > img {
+            transform: none !important;
+        }
+        
+        .feature-card:hover {
+            transform: none !important;
+        }
+        
+        .card:hover {
+            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1) !important;
+        }
+    }
+}
+
+/* Особые стили для очень маленьких экранов */
+@media (max-width: 480px) {
+    .container {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem !important;
+    }
+
+    .hero-content p {
+        font-size: 1rem !important;
+        padding: 0 15px !important;
+    }
+
+    .material {
+        font-size: 2.5rem !important;
+        margin-bottom: 40px !important;
+    }
+
+    .magazin {
+        margin: 40px 15px !important;
+    }
+
+    .slideshow {
+        height: 250px !important;
+    }
+
+    .slideshow-item-text {
+        padding: 10px !important;
+        max-width: 95% !important;
+    }
+
+    .slideshow-item-text h3 {
+        font-size: 1.1rem !important;
+    }
+
+    .slideshow-item-text p {
+        font-size: 0.9rem !important;
+    }
+
+    .category-tab {
+        flex: 1 0 100% !important;
+        font-size: 14px !important;
+    }
+
+    .card__title {
+        font-size: 15px !important;
+    }
+
+    .card__add {
+        font-size: 15px !important;
+    }
+}
+
+/* Горизонтальная ориентация на мобильных */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero-section {
+        height: auto !important;
+        min-height: 100vh !important;
+    }
+
+    .hero-header {
+        padding: 10px 5% !important;
+    }
+
+    .hero-content {
+        padding: 50px 5% 30px !important;
+    }
+
+    .mobile-menu {
+        justify-content: flex-start !important;
+        padding-top: 80px !important;
+    }
+
+    .auth-container {
+        margin: 10px auto !important;
+        max-height: 90vh !important;
+        overflow-y: auto !important;
+    }
+}
+
+/* Убираем контуры для мобильных устройств */
+@media (max-width: 768px) {
+    header nav ul li a:hover,
+    .hero-header nav ul li a:hover,
+    .btn:hover,
+    .theme-toggle:hover,
+    .card__add:hover,
+    .auth-btn:hover,
+    .hero-btn:hover {
+        outline: none !important;
+        box-shadow: none !important;
+        text-decoration: none !important;
+        border: none !important;
+        transform: none !important;
+    }
+
+    /* Улучшаем видимость активных элементов */
+    header nav ul li.active a,
+    .hero-header nav ul li.active a {
+        background: var(--accent-primary) !important;
+        color: var(--accent-secondary) !important;
+        padding: 10px 15px !important;
+        border-radius: 6px !important;
+        font-weight: 600 !important;
+    }
+}
+
+/* Предотвращаем масштабирование при фокусе на iOS */
+input, select, textarea {
+    font-size: 16px !important;
+}
+
+/* Улучшаем скролл на iOS */
+body {
+    -webkit-overflow-scrolling: touch !important;
+}
+
+/* Убираем подсветку при тапе на iOS */
+button, a {
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+/* ==================== */
+/* ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ ВЕРХНЕЙ НАВИГАЦИИ */
+/* ==================== */
+
+/* Общие стили для десктопной навигации */
+header nav ul,
+.hero-header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Уменьшаем расстояние между кнопками */
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Стили для всех пунктов меню */
+header nav ul li,
+.hero-header nav ul li {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Стили для обычных кнопок */
+header nav ul li.btn,
+.hero-header nav ul li.btn {
+    margin: 0;
+}
+
+/* Стили для ссылок в навигации */
+header nav ul li a,
+.hero-header nav ul li a {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 6px 12px; /* Уменьшаем отступы */
+    border-radius: 4px;
+    font-size: 14px; /* Уменьшаем шрифт */
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 32px; /* Уменьшаем минимальную высоту */
+}
+
+/* Стили для активной ссылки */
+header nav ul li.active a,
+.hero-header nav ul li.active a {
+    background: var(--accent-primary);
+    color: var(--accent-secondary);
+    padding: 6px 12px; /* Такие же отступы как у обычных */
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+/* Стили для кнопки темы */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 16px; /* Уменьшаем размер иконки */
+    cursor: pointer;
+    padding: 6px 8px; /* Уменьшаем отступы */
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px; /* Фиксированная ширина */
+    height: 32px; /* Фиксированная высота */
+    min-width: 32px;
+    min-height: 32px;
+}
+
+.theme-toggle:hover {
+    background: rgba(55, 222, 222, 0.2);
+    transform: scale(1.05);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Убираем контуры при наведении */
+header nav ul li a:hover,
+.hero-header nav ul li a:hover,
+.theme-toggle:hover {
+    outline: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    border: none !important;
+}
+
+/* Специфичные стили для неактивных ссылок при наведении */
+header nav ul li:not(.active) a:hover,
+.hero-header nav ul li:not(.active) a:hover {
+    color: var(--accent-primary) !important;
+    background: rgba(55, 222, 222, 0.1) !important;
+}
+
+/* Стили для логотипа */
+header .logo,
+.hero-header .logo {
+    width: 60px; /* Уменьшаем логотип для баланса */
+    height: 60px;
+    object-fit: contain;
+}
+
+.hero-header .logo {
+    width: 80px; /* В hero можно чуть больше */
+    height: 80px;
+}
+
+/* ==================== */
+/* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ */
+/* ==================== */
+
+@media (max-width: 768px) {
+    /* Скрываем десктопную навигацию */
+    header nav ul,
+    .hero-header nav ul {
+        display: none !important;
+    }
+    
+    /* Показываем кнопку мобильного меню */
+    .mobile-menu-toggle {
+        display: flex !important;
+    }
+    
+    /* Увеличиваем хитбоксы для мобильных */
+    .mobile-menu ul li a,
+    .mobile-menu ul li .theme-toggle {
+        min-height: 44px; /* Стандартный размер для касаний */
+        padding: 12px 20px;
+        font-size: 16px;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .hero-header {
+        padding: 10px 15px !important;
+    }
+    
+    .hero-header .logo {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* ==================== */
+/* УЛУЧШЕНИЯ ДЛЯ КОНТЕЙНЕРА */
+/* ==================== */
+
+/* Обновляем контейнер для лучшего выравнивания */
+header,
+.hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    width: 90%;
+}
+
+/* Для обычного хедера */
+header {
+    padding: 20px 5%;
+}
+
+/* Убедимся, что навигация занимает нужное пространство */
+header nav,
+.hero-header nav {
+    display: flex;
+    align-items: center;
+}
+
+/* ==================== */
+/* СПЕЦИФИЧНЫЕ ИСПРАВЛЕНИЯ ДЛЯ СВЕТЛОЙ ТЕМЫ */
+/* ==================== */
+
+[data-theme="light"] header nav ul li a,
+[data-theme="light"] .hero-header nav ul li a {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] header nav ul li:not(.active) a:hover,
+[data-theme="light"] .hero-header nav ul li:not(.active) a:hover {
+    color: var(--accent-primary) !important;
+    background: rgba(34, 138, 138, 0.1) !important;
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background: rgba(34, 138, 138, 0.2) !important;
+}
+
+/* ==================== */
+/* ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ */
+/* ==================== */
+
+/* Убираем стандартные отступы у списка */
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Гарантируем, что кнопки не переносятся */
+header nav ul,
+.hero-header nav ul {
+    flex-wrap: nowrap;
+    overflow: visible;
+}
+
+/* Улучшаем внешний вид для очень плотного расположения */
+@media (min-width: 769px) and (max-width: 1024px) {
+    header nav ul li a,
+    .hero-header nav ul li a {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+    
+    .theme-toggle {
+        padding: 6px;
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* Анимация для плавности */
+header nav ul li a,
+.hero-header nav ul li a,
+.theme-toggle {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+
+/* ==================== */
+/* ОБНОВЛЕННЫЕ СТИЛИ ДЛЯ ВЕРХНЕЙ НАВИГАЦИИ */
+/* ==================== */
+
+/* Общие стили для десктопной навигации */
+header nav ul,
+.hero-header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Возвращаем нормальное расстояние */
+    flex-wrap: nowrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-left: auto; /* Сдвигаем к правому краю */
+}
+
+/* Стили для всех пунктов меню */
+header nav ul li,
+.hero-header nav ul li {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* Стили для обычных кнопок */
+header nav ul li.btn,
+.hero-header nav ul li.btn {
+    margin: 0;
+}
+
+/* Стили для ссылок в навигации - ВОЗВРАЩАЕМ ИЗНАЧАЛЬНЫЕ РАЗМЕРЫ */
+header nav ul li a,
+.hero-header nav ul li a {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 7px 15px; /* Возвращаем изначальные отступы */
+    border-radius: 6px;
+    font-size: 16px; /* Возвращаем нормальный размер шрифта */
+    font-weight: 500;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: auto; /* Убираем фиксированную высоту */
+}
+
+/* Стили для активной ссылки */
+header nav ul li.active a,
+.hero-header nav ul li.active a {
+    background: var(--accent-primary);
+    color: var(--accent-secondary);
+    padding: 7px 15px; /* Такие же отступы как у обычных */
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* Стили для кнопки темы - ВОЗВРАЩАЕМ ИЗНАЧАЛЬНЫЕ РАЗМЕРЫ */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 24px; /* Возвращаем изначальный размер иконки */
+    cursor: pointer;
+    padding: 5px 10px; /* Возвращаем изначальные отступы */
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto; /* Убираем фиксированную ширину */
+    height: auto; /* Убираем фиксированную высоту */
+    min-width: auto;
+    min-height: auto;
+}
+
+.theme-toggle:hover {
+    background: rgba(55, 222, 222, 0.2);
+    transform: scale(1.1);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Убираем контуры при наведении */
+header nav ul li a:hover,
+.hero-header nav ul li a:hover,
+.theme-toggle:hover {
+    outline: none !important;
+    box-shadow: none !important;
+    text-decoration: none !important;
+    border: none !important;
+}
+
+/* Специфичные стили для неактивных ссылок при наведении */
+header nav ul li:not(.active) a:hover,
+.hero-header nav ul li:not(.active) a:hover {
+    color: var(--accent-primary) !important;
+    background: rgba(55, 222, 222, 0.1) !important;
+}
+
+/* ВОЗВРАЩАЕМ ИЗНАЧАЛЬНЫЕ РАЗМЕРЫ ЛОГОТИПА */
+header .logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.hero-header .logo {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}
+
+/* ==================== */
+/* ВЫРАВНИВАНИЕ К ПРАВОМУ КРАЮ */
+/* ==================== */
+
+/* Основной хедер */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 0;
+    width: 100%;
+}
+
+header .logo {
+    padding-left: 80px;
+}
+
+header nav {
+    float: right;
+    width: auto; /* Убираем фиксированную ширину */
+    margin-right: 80px; /* Отступ от правого края */
+}
+
+/* Хедер в hero секции */
+.hero-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    width: 90%;
+}
+
+.hero-header nav {
+    float: right;
+    width: auto; /* Убираем фиксированную ширину */
+}
+
+/* Убедимся, что навигация прижата к правому краю */
+header nav ul,
+.hero-header nav ul {
+    justify-content: flex-end; /* Выравниваем элементы по правому краю */
+    margin-left: auto; /* Прижимаем к правому краю */
+}
+
+/* ==================== */
+/* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ */
+/* ==================== */
+
+@media (max-width: 768px) {
+    /* Скрываем десктопную навигацию */
+    header nav ul,
+    .hero-header nav ul {
+        display: none !important;
+    }
+    
+    /* Показываем кнопку мобильного меню */
+    .mobile-menu-toggle {
+        display: flex !important;
+        margin-left: auto; /* Прижимаем к правому краю */
+        margin-right: 20px;
+    }
+    
+    /* Уменьшаем логотип для мобильных */
+    header .logo {
+        width: 80px;
+        height: 80px;
+        padding-left: 20px;
+    }
+    
+    .hero-header .logo {
+        width: 120px;
+        height: 120px;
+    }
+    
+    /* Убираем отступы у навигации */
+    header nav,
+    .hero-header nav {
+        margin-right: 0;
+    }
+    
+    /* Мобильное меню */
+    .mobile-menu ul li a,
+    .mobile-menu ul li .theme-toggle {
+        min-height: 44px;
+        padding: 15px 30px;
+        font-size: 1.3rem;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-width: 480px) {
+    .hero-header {
+        padding: 10px 15px !important;
+    }
+    
+    .hero-header .logo {
+        width: 100px;
+        height: 100px;
+    }
+    
+    header .logo {
+        width: 70px;
+        height: 70px;
+        padding-left: 15px;
+    }
+}
+
+/* ==================== */
+/* УЛУЧШЕНИЯ ДЛЯ КОНТЕЙНЕРА */
+/* ==================== */
+
+/* Обновляем контейнер для лучшего выравнивания */
+.container {
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 80px;
+}
+
+/* Убедимся, что навигация занимает нужное пространство */
+header nav,
+.hero-header nav {
+    display: flex;
+    align-items: center;
+}
+
+/* ==================== */
+/* СПЕЦИФИЧНЫЕ ИСПРАВЛЕНИЯ ДЛЯ СВЕТЛОЙ ТЕМЫ */
+/* ==================== */
+
+[data-theme="light"] header nav ul li a,
+[data-theme="light"] .hero-header nav ul li a {
+    color: var(--text-primary);
+}
+
+[data-theme="light"] header nav ul li:not(.active) a:hover,
+[data-theme="light"] .hero-header nav ul li:not(.active) a:hover {
+    color: var(--accent-primary) !important;
+    background: rgba(34, 138, 138, 0.1) !important;
+}
+
+[data-theme="light"] .theme-toggle:hover {
+    background: rgba(34, 138, 138, 0.2) !important;
+}
+
+/* ==================== */
+/* ДОПОЛНИТЕЛЬНЫЕ УЛУЧШЕНИЯ */
+/* ==================== */
+
+/* Убираем стандартные отступы у списка */
+nav ul {
+    margin: 0;
+    padding: 0;
+}
+
+/* Гарантируем, что кнопки не переносятся */
+header nav ul,
+.hero-header nav ul {
+    flex-wrap: nowrap;
+    overflow: visible;
+}
+
+/* Улучшаем внешний вид для очень плотного расположения */
+@media (min-width: 769px) and (max-width: 1024px) {
+    header nav {
+        margin-right: 40px;
+    }
+    
+    .container {
+        padding-right: 40px;
+    }
+}
+
+/* Анимация для плавности */
+header nav ul li a,
+.hero-header nav ul li a,
+.theme-toggle {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Убираем подчеркивание при наведении для неактивных пунктов */
+header nav ul li:not(.active) a:hover,
+.hero-header nav ul li:not(.active) a:hover {
+    border-bottom: none !important;
+}
